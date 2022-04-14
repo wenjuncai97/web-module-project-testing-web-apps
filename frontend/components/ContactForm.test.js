@@ -36,7 +36,6 @@ test('renders THREE error messages if user enters no values into any fields.', a
     
     userEvent.click(submitBtn);
 
-
     // await waitFor(() => {
     //     const errorMessages = screen.queryAllByTestId("error")
     //     expect(errorMessages).toHaveLength(3);
@@ -124,19 +123,16 @@ test('renders all fields text when all fields are submitted.', async () => {
     render(<ContactForm />);
 
     const firstNameInput = screen.getByLabelText(/first name*/i);
-    userEvent.type(firstNameInput, "Nathan");
-
-    const lastNameInput = screen.getByLabelText(/last name*/i);
-    userEvent.type(lastNameInput, "Cai");
-
     const emailInput = screen.getByLabelText(/email*/i);
-    userEvent.type(emailInput, "nate97@gmail.com");
-
-    const submitBtn = screen.getByRole('button');
-    userEvent.click(submitBtn);
-
+    const lastNameInput = screen.getByLabelText(/last name*/i);
     const messageField = screen.getByLabelText(/message/i);
+    const submitBtn = screen.getByRole('button');
+    
+    userEvent.type(firstNameInput, "Nathan");
+    userEvent.type(lastNameInput, "Cai");
+    userEvent.type(emailInput, "nate97@gmail.com");
     userEvent.type(messageField, "Message");
+    userEvent.click(submitBtn);
 
     await waitFor(() => {
         const firstNameDisplay = screen.queryByText(/nathan/i);
